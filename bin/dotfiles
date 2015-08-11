@@ -140,7 +140,6 @@ mirrorfiles() {
 	link "bash/bashrc"          ".bashrc"
 	link "bash/bash_profile"    ".bash_profile"
 	link "bash/inputrc"         ".inputrc"
-	link "bash/jscsrc"          ".jscsrc"
 	link "git/gitattributes"    ".gitattributes"
 	link "git/gitignore"        ".gitignore"
 }
