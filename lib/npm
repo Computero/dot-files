@@ -19,13 +19,11 @@ run_npm() {
 		local list_packages
 		local -a missing_packages
 		local -a desired_packages=(
-			'duo'
 			'empty-trash'
 			'gulp'
-			'imagemin'
-			'jscs'
-			'jshint'
+			'npm@3'
 			'trash'
+			'xo'
 		)
 
 		# Store the name (and options) of every missing package

@@ -38,13 +38,10 @@ $ bash -c "$(curl -fsSL raw.github.com/kevva/dotfiles/master/bin/dotfiles)"
 
 **Node packages**:
 
-* [duo](http://duojs.org/)
 * [empty-trash](https://github.com/sindresorhus/empty-trash/)
 * [gulp](http://gulpjs.com/)
-* [imagemin](https://github.com/imagemin/imagemin/)
-* [jscs](https://github.com/mdevils/node-jscs/)
-* [jshint](http://jshint.com/)
 * [trash](https://github.com/sindresorhus/trash/)
+* [xo](https://github.com/sindresorhus/xo/)
 
 **Sublime Text packages**:
 
