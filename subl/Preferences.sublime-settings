@@ -16,12 +16,13 @@
 		"*.swf",
 		"*.jar",
 		"*.zip",
-		"components/*",
-		"node_modules/*"
+		"node_modules/*",
+		"/node_modules/",
+		"/node_modules/*"
 	],
 	"bold_folder_labels": true,
 	"caret_style": "solid",
-	"color_scheme": "Packages/Color Scheme - Default/Solarized (Dark).tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/Oceanic Next (SL).tmTheme",
 	"default_line_ending": "unix",
 	"detect_indentation": true,
 	"drag_text": false,
