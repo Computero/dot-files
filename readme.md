@@ -26,6 +26,7 @@ $ ellipsis install kevva/files
 **APT packages**:
 
 * [curl](http://curl.haxx.se/)
+* [git-core](http://git-scm.com/)
 * [Google Chrome](http://google.com/chrome/browser/)
 * [libjpeg](http://libjpeg.sourceforge.net)
 * [libpng](http://www.libpng.org/pub/png/libpng.html)
