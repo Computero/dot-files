@@ -17,7 +17,7 @@ run_apt() {
 		local -a desired_packages=(
 			'curl'
 			'dconf-cli'
-			'google-chrome-stable'
+			'google-chrome-unstable'
 			'libjpeg-dev'
 			'libpng-dev'
 			'spotify-client'

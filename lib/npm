@@ -19,9 +19,10 @@ run_npm() {
 		local list_packages
 		local -a missing_packages
 		local -a desired_packages=(
+			'ava'
 			'empty-trash'
 			'gulp'
-			'npm@3'
+			'npm@next'
 			'trash'
 			'xo'
 		)

@@ -64,14 +64,14 @@ check_git() {
 check_nvm() {
 	if ! type_exists 'node'; then
 		log_header "Installing nvm..."
-		curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v0.25.0/install.sh | bash
+		curl -fsSL https://raw.githubusercontent.com/creationix/nvm/v0.30.1/install.sh | bash
 		source ${HOME}/.nvm/nvm.sh
 	fi
 }
 
 # Check for node
 check_node() {
-	local version="iojs"
+	local version="5"
 
 	if ! type_exists 'node'; then
 		log_header "Installing node..."
