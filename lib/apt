@@ -1,62 +1,19 @@
 #!/bin/bash
 
-run_apt() {
-	if type_exists 'apt-get'; then
-		log_header "Installing packages..."
+# Update repositories
+sudo apt-get update
 
-		# Update apt-get
-		sudo apt-get update -qqy &> /dev/null
+# Upgrade existing packages
+sudo apt-get dist-upgrade
 
-		# Update any already-installed packages
-		sudo apt-get dist-upgrade -qqy &> /dev/null
+# Install core utils
+sudo apt-get install build-essential
+sudo apt-get install curl
+sudo apt-get install libjpeg-dev
+sudo apt-get install libpng-dev
+sudo apt-get install software-properties-common
 
-		# Install core packages
-		sudo apt-get install --allow-unauthenticated -qqy build-essential software-properties-common &> /dev/null
-
-		local list_packages
-		local -a desired_packages=(
-			'curl'
-			'dconf-cli'
-			'google-chrome-unstable'
-			'libjpeg-dev'
-			'libpng-dev'
-			'spotify-client'
-			'sublime-text-installer'
-			'vlc'
-			'wget'
-		)
-
-		if ! type_exists 'google-chrome'; then
-			add_key "https://dl-ssl.google.com/linux/linux_signing_key.pub"
-			add_source_list "http://dl.google.com/linux/deb/ stable main" "google-chrome.list"
-		fi
-
-		if ! type_exists 'subl'; then
-			add_repo "ppa:webupd8team/sublime-text-3"
-		fi
-
-		if ! type_exists 'spotify'; then
-			add_repo "deb http://repository.spotify.com stable non-free"
-			sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 94558F59 &> /dev/null
-		fi
-
-		if ! type_exists 'vlc'; then
-			add_repo "ppa:videolan/stable-daily"
-		fi
-
-		# Convert the array of missing packages into a list of space-separate strings
-		list_packages=$( printf "%s " "${desired_packages[@]}" )
-
-		# Install all packages
-		sudo apt-get update -qqy &> /dev/null
-		sudo apt-get install --allow-unauthenticated -qqy ${list_packages}
-		sudo apt-get autoremove -qqy &> /dev/null
-
-		[[ $? ]] && log_success "Done"
-	else
-		printf "\n"
-		log_error "Error: apt-get not found"
-		printf "Aborting...\n"
-		exit 1
-	fi
-}
+# Install Google Chrome
+wget -qO - "https://dl-ssl.google.com/linux/linux_signing_key.pub" | sudo apt-key add -
+sh -c "printf 'deb http://dl.google.com/linux/deb/ stable main' >> '/etc/apt/sources.list.d/google-chrome.list'"
+sudo apt-get install google-chrome-stable

@@ -1,57 +1,42 @@
 #!/bin/bash
 
-run_brew() {
-	# Check for Homebrew
-	if type_exists 'brew'; then
-		log_header "Updating any existing Homebrew formulae..."
+sudo -v
 
-		# Use the latest version of Homebrew
-		brew update &> /dev/null
+# Update existing `sudo` time stamp until the script has finished.
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-		# Upgrade any already-installed formulae
-		brew upgrade
-		[[ $? ]] && log_success "Done"
+# Make sure we’re using the latest Homebrew
+brew update
 
-		local list_formulae
-		local -a missing_formulae
-		local -a desired_formulae=(
-			'coreutils'
-			'git'
-			'ack'
-			'bash'
-			'bash-completion'
-			'tree'
-			'wget'
-		)
+# Upgrade any already-installed formulae
+brew upgrade --all
 
-		# Store the name (and options) of every missing formula
-		for i in ${!desired_formulae[*]}
-		do
-			if ! formula_exists ${desired_formulae[$i]}; then
-				missing_formulae=("${missing_formulae[@]}" "${desired_formulae[$i]}")
-			fi
-		done
+# Install GNU core utilities (those that come with OS X are outdated)
+brew install coreutils
 
-		if [[ "${missing_formulae}" ]]; then
-			# Convert the array of missing formula into a list of space-separate strings
-			list_formulae=$( printf "%s " "${missing_formulae[@]}" )
+# Install some other useful utilities like `sponge`
+brew install moreutils
 
-			log_header "Installing missing Homebrew formulae..."
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
+brew install findutils
 
-			# Install all missing formulae
-			brew install ${list_formulae}
-			[[ $? ]] && log_success "Done"
-		fi
+# Install GNU `sed`, overwriting the built-in `sed`
+brew install gnu-sed --with-default-names
 
-		# Install latest rsync
-		brew install https://raw.github.com/Homebrew/homebrew-dupes/master/rsync.rb
+# Install `bash`
+brew install bash
+brew tap homebrew/versions
+brew install bash-completion2
 
-		# Remove outdated versions from the Cellar
-		brew cleanup
-	else
-		printf "\n"
-		log_error "Error: Homebrew not found"
-		printf "Aborting...\n"
-		exit
-	fi
-}
+# Install `wget` with IRI support
+brew install wget --with-iri
+
+# Install more recent versions of some OS X tools
+brew install homebrew/dupes/grep
+brew install homebrew/dupes/openssh
+
+# Install git
+brew install git
+
+# Remove outdated versions from the cellar
+brew cleanup
