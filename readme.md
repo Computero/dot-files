@@ -35,6 +35,8 @@ $ ellipsis install kevva/files
 
 ## Related
 
+* [dot-prompt](https://github.com/kevva/dot-prompt)
+* [dot-node](https://github.com/kevva/dot-node)
 * [dot-sublime](https://github.com/kevva/dot-sublime)
 
 
